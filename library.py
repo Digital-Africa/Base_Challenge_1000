@@ -24,11 +24,12 @@ from sklearn.datasets import fetch_20newsgroups
 
 class RefEnv(object):
     """docstring for RefEnv"""
-    def __init__(self):
+    def __init__(self, path_PROJECT_DATA= '/Users/py3/Google Drive (mohamed.diabakhate@digital-africa.co)'):
         self.dst = 'Source'
         self.Export_folder = 'Export'
-        self.src = '/Users/py3/Google Drive (mohamed.diabakhate@digital-africa.co)/PROJET DATA/DATA/{}'
-        self.transformed = '/Users/py3/Google Drive (mohamed.diabakhate@digital-africa.co)/PROJET DATA/DATA/Transformed/{}'
+        self.path_PROJECT_DATA = path_PROJECT_DATA
+        self.src = '{}/PROJET DATA/DATA/{}'.format(self.path_PROJECT_DATA, '{}')
+        self.transformed = '{}/PROJET DATA/DATA/Transformed/{}'.format(self.path_PROJECT_DATA, '{}')
 
 class Transformation(object):
     """docstring for RefEnv"""
@@ -98,8 +99,8 @@ class Transformation(object):
         return self.X
     
 class Keyword_extraction(object):
-    def __init__(self,list_stop_word):
-        self.categories = ['technologie', 'agriculture', 'sante','education']
+    def __init__(self,list_stop_word, categories = ['technologie', 'agriculture', 'sante','education']):
+        self.categories = categories
         self.X = Transformation().operation()
         self.header_tr = [a for a in self.X.keys().values.tolist() if 'trad' in a]
         self.stop_words = set(stopwords.words('english')).union(set(stopwords.words('french'))).union(set(list_stop_word))
@@ -159,11 +160,11 @@ class LDA(object):
     from sklearn.decomposition import NMF, LatentDirichletAllocation
     from sklearn.datasets import fetch_20newsgroups
 
-    def __init__(self):
-        self.n_samples = 2000
-        self.n_features = 1000
-        self.n_components = 20
-        self.n_top_words = 20
+    def __init__(self, n_samples = 2000, n_features = 1000, n_components = 20, n_top_words = 20):
+        self.n_samples = n_samples 
+        self.n_features = n_features
+        self.n_components = n_components
+        self.n_top_words = n_top_words
 
     def print_top_words(self, model, feature_names, n_top_words):
         for topic_idx, topic in enumerate(model.components_):
