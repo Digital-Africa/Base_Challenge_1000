@@ -106,7 +106,7 @@ class Keyword_extraction(object):
         self.X = self.operation()
 
     def tokenize_n_stemm(self, element):
-        stemmer=  PorterStemmer()
+        stemmer =  PorterStemmer()
         return ' '.join([stemmer.stem(i) for i in word_tokenize(element) if not i in self.stop_words])
     
     def tokenize_n_lemm(self, element):
