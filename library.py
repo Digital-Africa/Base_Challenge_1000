@@ -28,13 +28,15 @@ class RefEnv(object):
         self.dst = 'Source'
         self.Export_folder = 'Export'
         self.path_PROJECT_DATA = path_PROJECT_DATA
-        self.src = '{}/PROJET DATA/DATA/{}'.format(self.path_PROJECT_DATA, '{}')
         self.transformed = '{}/PROJET DATA/DATA/Transformed/{}'.format(self.path_PROJECT_DATA, '{}')
+
+class Selector(object):
+    def
+
 
 class Transformation(object):
     """docstring for RefEnv"""
     def __init__(self):
-        self.src = RefEnv().src.format('Transformed/df1_clean.csv')
         self.output = RefEnv().transformed.format('traduct.json')
         self.X = pandas.read_json(self.output).fillna('VIDE')
         #self.export = X.to_csv(RefEnv().src.format('Transformed/prep_df1_clean.csv'))
