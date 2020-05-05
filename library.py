@@ -22,8 +22,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.decomposition import NMF, LatentDirichletAllocation
 from sklearn.datasets import fetch_20newsgroups
 
+path_PROJECT_DATA= '/Volumes/GoogleDrive/My Drive'
+
 class RefEnv(object):
-    """edit docs-strings"""
+    """edit docs"""
     def __init__(self, path_PROJECT_DATA= '/Volumes/GoogleDrive/My Drive'):
         self.dst = 'Source'
         self.Export_folder = 'Export'
@@ -108,7 +110,7 @@ class Transformation(object):
 class Keyword_extraction(object):
     def __init__(self, X):
         self.X = X
-        self.header_tr = [a for a in self.X.keys().values.tolist() if 'trad' in a]
+        self.header_tr = ['prez_struc', 'prez_produit_struc','prez_marche_struc','prez_zone_struc','prez_objectif_struc', 'prez_innovante_struc','prez_duplicable_struc', 'prez_durable_struc']
         self.stopwords_file = RefEnv().transformed.format('stopwords.txt')
         self.stop_words = self.get_set_stopwords()
         self.X = self.operation()
