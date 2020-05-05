@@ -30,16 +30,53 @@ class RefEnv(object):
         self.path_PROJECT_DATA = path_PROJECT_DATA
         self.transformed = '{}/PROJET DATA/DATA/Transformed/{}'.format(self.path_PROJECT_DATA, '{}')
 
-class Selector(object):
-    def
+class Transformation_2(object):
+    """docstring for RefEnv"""
+    def __init__(self):
+        self.X = pandas.read_csv(RefEnv().transformed.format('df1_clean.csv'))
+        self.X = self.operation()
+        
+    def categorie_structure(self,cat_struc,cat_autre_struc):
+        if cat_struc == "Santé, bien être, et protection sociale" or cat_struc == "Health, well-being and social protection":
+            return "sante" 
+        if cat_struc == "Fintech":
+            return "finance"
+        if cat_struc == "Technologies émergentes" or cat_struc == "Emerging technologies":
+            return "technologie"
+        if cat_struc == "Médias, édition et communication" or cat_struc =="Media, publishing and communication":
+            return "media"
+        if cat_struc == "Agriculture, territoires ruraux et ressources naturelles" or cat_struc == "Agriculture, rural areas and natural resources":
+            return  "agriculture"
+        if cat_struc == "Education, formation professionnelle et emploi" or cat_struc =="Education, vocational training and employment":
+            return  "education" 
+        if cat_struc == "E-commerce, marketing et distribution" or cat_struc == "E-commerce, marketing and distribution":
+            return  "ecommerce"
+        if cat_struc == "Gouvernement ouvert et transformation sociale" or cat_struc == "Open government and social transformation":
+            return  "gouvernement"
+        if cat_struc == "Energie" or cat_struc == "Energy":
+            return  "energie" 
+        if cat_struc == "Territoires intelligents et mobilité" or cat_struc == "Intelligent territories and mobility":
+            return  "mobilite"
+        if cat_struc == "Industries culturelles et créatives" or cat_struc == "Cultural and creative industries":
+            return  "culture"
+        if (cat_struc == "Autre (précisez)" or cat_struc == "Other - please specify" or cat_struc == "autre (précisez)"):
+            return  'autres'
+        if cat_struc != cat_struc:
+            return 'non renseigné'
+        else:
+            return cat_struc
+        
+    def operation(self):
+        self.X['categorie'] = self.X.apply(lambda x: self.categorie_structure(x['cat_struc'], x['cat_autre_struc']), axis=1)
+        return self.X.set_index('key_main')
+
 
 
 class Transformation(object):
     """docstring for RefEnv"""
     def __init__(self):
         self.output = RefEnv().transformed.format('traduct.json')
-        self.X = pandas.read_json(self.output).fillna('VIDE')
-        #self.export = X.to_csv(RefEnv().src.format('Transformed/prep_df1_clean.csv'))
+        self.X = pandas.read_json(self.output).fillna('VIDE')#.set_index('key_main')
         self.header = ['cat_struc', 'cat_autre_struc']
         self.header_tr = ['prez_struc', 'prez_produit_struc', 'prez_marche_struc', 'prez_zone_struc', 'prez_objectif_struc', 'prez_innovante_struc', 'prez_duplicable_struc', 'prez_durable_struc'] 
 
@@ -66,19 +103,18 @@ class Transformation(object):
         self.X.columns = ['key_main', 'prez_struc', 'prez_produit_struc','prez_marche_struc','prez_zone_struc','prez_objectif_struc', 'prez_innovante_struc','prez_duplicable_struc', 'prez_durable_struc']
         for head in self.header_tr:
             self.X['{}'.format(head)] = self.X[head].apply(self.preprocesssing)
-        #self.X.to_csv(RefEnv().src.format('Transformed/prep_df1_clean_trad.csv'))
         return self.X
     
 class Keyword_extraction(object):
-    def __init__(self,list_stop_word):
-        self.X = Transformation().operation()
+    def __init__(self, X):
+        self.X = X
         self.header_tr = [a for a in self.X.keys().values.tolist() if 'trad' in a]
-        self.stopwords_file = '{}/stopwords.txt'.format(RefEnv().transformed)
-        self.stop_words = get_set_stopwords()
+        self.stopwords_file = RefEnv().transformed.format('stopwords.txt')
+        self.stop_words = self.get_set_stopwords()
         self.X = self.operation()
 
-    def get_set_stopwords(self, ):
-        fileName = self.stopword_file
+    def get_set_stopwords(self):
+        fileName = self.stopwords_file
         stopword_file = open(fileName, 'r')
         list_stop_word = [line.split(',') for line in stopword_file.readlines()][0]
         return set(stopwords.words('english')).union(set(list_stop_word))
