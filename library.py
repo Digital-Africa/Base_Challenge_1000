@@ -23,7 +23,7 @@ from sklearn.decomposition import NMF, LatentDirichletAllocation
 from sklearn.datasets import fetch_20newsgroups
 
 class RefEnv(object):
-    """docstring for RefEnv"""
+    """edit docs-strings"""
     def __init__(self, path_PROJECT_DATA= '/Volumes/GoogleDrive/My Drive'):
         self.dst = 'Source'
         self.Export_folder = 'Export'
