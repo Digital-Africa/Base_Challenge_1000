@@ -2,7 +2,6 @@ import pandas
 import collections
 import math
 import collections
-from googletrans import Translator
 import re
 import nltk
 #nltk.download('wordnet')
@@ -91,11 +90,15 @@ class Transformation(object):
     def remove_punctuation(self, element):
         return element.translate(str.maketrans('', '', string.punctuation))
 
+    def remove_special_char(self, element):
+        return element.replace('\r\n', ' ').replace('\t',' ')
+
     def remove_whitespaces(self, element):
         return element.strip()
 
     def preprocesssing(self, element):
         element = self.remove_punctuation(element)
+        element = self.remove_special_char(element)
         element = self.number_to_text(element)
         element = self.lower_case(element)    
         element = self.remove_whitespaces(element)
