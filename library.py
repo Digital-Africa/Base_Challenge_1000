@@ -120,10 +120,6 @@ class Keyword_extraction(object):
         stopword_file = open(fileName, 'r')
         list_stop_word = [line.split(',') for line in stopword_file.readlines()][0]
         return set(stopwords.words('english')).union(set(list_stop_word))
-
-    def tokenize_n_stemm(self, element):
-        stemmer =  PorterStemmer()
-        return ' '.join([stemmer.stem(i) for i in word_tokenize(element) if not i in self.stop_words])
     
     def tokenize_n_lemm(self, element):
         lemmer=  WordNetLemmatizer()
@@ -131,7 +127,6 @@ class Keyword_extraction(object):
     
     def operation(self):
         for head in self.header_tr:
-            self.X['{}_stemm'.format(head)] = self.X[head].apply(self.tokenize_n_stemm)
             self.X['{}_lemm'.format(head)] = self.X[head].apply(self.tokenize_n_lemm)
         return self.X
 
