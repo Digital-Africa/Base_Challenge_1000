@@ -11,6 +11,7 @@ from nltk.stem import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 import string
 import time
+from nltk.corpus import wordnet
 
 import requests
 import urllib.parse
@@ -80,6 +81,7 @@ class Transformation(object):
         self.X = pandas.read_json(self.output).fillna('VIDE')#.set_index('key_main')
         self.header = ['cat_struc', 'cat_autre_struc']
         self.header_tr = ['prez_struc', 'prez_produit_struc', 'prez_marche_struc', 'prez_zone_struc', 'prez_objectif_struc', 'prez_innovante_struc', 'prez_duplicable_struc', 'prez_durable_struc'] 
+        self.X = self.operation()
 
     def lower_case(self, element):
         return element.lower()
@@ -91,7 +93,7 @@ class Transformation(object):
         return element.translate(str.maketrans('', '', string.punctuation))
 
     def remove_special_char(self, element):
-        return element.replace('\r\n', ' ').replace('\t',' ')
+        return element.replace('\r\n', ' ').replace('\t',' ').replace('/', ' ')
 
     def remove_whitespaces(self, element):
         return element.strip()
@@ -116,6 +118,7 @@ class Keyword_extraction(object):
         self.header_tr = ['prez_struc', 'prez_produit_struc','prez_marche_struc','prez_zone_struc','prez_objectif_struc', 'prez_innovante_struc','prez_duplicable_struc', 'prez_durable_struc']
         self.stopwords_file = RefEnv().transformed.format('stopwords.txt')
         self.stop_words = self.get_set_stopwords()
+        self.lemmatizer = WordNetLemmatizer()
         self.X = self.operation()
 
     def get_set_stopwords(self):
@@ -124,13 +127,40 @@ class Keyword_extraction(object):
         list_stop_word = [line.split(',') for line in stopword_file.readlines()][0]
         return set(stopwords.words('english')).union(set(list_stop_word))
     
-    def tokenize_n_lemm(self, element):
-        lemmer=  WordNetLemmatizer()
-        return ' '.join([lemmer.lemmatize(i) for i in word_tokenize(element) if not i in self.stop_words])
+    def nltk2wn_tag(self, nltk_tag):
+        if nltk_tag.startswith('J'):
+            return wordnet.ADJ
+        elif nltk_tag.startswith('V'):
+            return wordnet.VERB
+        elif nltk_tag.startswith('N'):
+            return wordnet.NOUN
+        elif nltk_tag.startswith('R'):
+            return wordnet.ADV
+        else:                    
+            return None
+
+    def is_stopword(self, element):
+        if element in self.stop_words:
+            return True
+        else:
+            return False
+
+    def lemmatize_sentence(self, sentence):
+        nltk_tagged = nltk.pos_tag(nltk.word_tokenize(sentence))    
+        wn_tagged = map(lambda x: (x[0], self.nltk2wn_tag(x[1])), nltk_tagged)
+
+        res_words = []
+        for word, tag in wn_tagged:
+            if tag is None:                       
+                res_words.append(word)
+            else:
+                res_words.append(self.lemmatizer.lemmatize(word, tag))
+
+        return " ".join([wrd for wrd in res_words if self.is_stopword(wrd) == False])
     
     def operation(self):
         for head in self.header_tr:
-            self.X['{}_lemm'.format(head)] = self.X[head].apply(self.tokenize_n_lemm)
+            self.X['{}_lemm'.format(head)] = self.X[head].apply(self.lemmatize_sentence)
         return self.X
 
 class LDA(object):
