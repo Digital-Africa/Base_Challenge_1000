@@ -21,6 +21,8 @@ from time import time
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.decomposition import NMF, LatentDirichletAllocation
 from sklearn.datasets import fetch_20newsgroups
+import numpy as np
+
 
 path_PROJECT_DATA= '/Volumes/GoogleDrive/My Drive'
 
@@ -32,7 +34,7 @@ class RefEnv(object):
         self.path_PROJECT_DATA = path_PROJECT_DATA
         self.transformed = '{}/PROJET DATA/DATA/Transformed/{}'.format(self.path_PROJECT_DATA, '{}')
 
-class Transformation_2(object):
+class Filter(object):
     """docstring for RefEnv"""
     def __init__(self):
         self.X = pandas.read_csv(RefEnv().transformed.format('df1_clean.csv'))
@@ -69,8 +71,10 @@ class Transformation_2(object):
             return cat_struc
         
     def operation(self):
+        self.X['nbr_salarie'] = self.X[['empl_h_struc', 'empl_f_struc']].agg(sum, axis=1)
+        self.X['ca_2019'] = self.X[['ca_2019_trim1', 'ca_2019_trim2', 'ca_2019_trim3']].agg(sum, axis=1)
         self.X['categorie'] = self.X.apply(lambda x: self.categorie_structure(x['cat_struc'], x['cat_autre_struc']), axis=1)
-        return self.X.set_index('key_main')
+        return self.X.set_index('key_main')[['categorie','age_pers','nbr_salarie','ca_2017','ca_2018','ca_2019']]
 
 
 
@@ -79,7 +83,6 @@ class Transformation(object):
     def __init__(self):
         self.output = RefEnv().transformed.format('traduct.json')
         self.X = pandas.read_json(self.output).fillna('VIDE')#.set_index('key_main')
-        self.header = ['cat_struc', 'cat_autre_struc']
         self.header_tr = ['prez_struc', 'prez_produit_struc', 'prez_marche_struc', 'prez_zone_struc', 'prez_objectif_struc', 'prez_innovante_struc', 'prez_duplicable_struc', 'prez_durable_struc'] 
         self.X = self.operation()
 
@@ -110,13 +113,13 @@ class Transformation(object):
         self.X.columns = ['key_main', 'prez_struc', 'prez_produit_struc','prez_marche_struc','prez_zone_struc','prez_objectif_struc', 'prez_innovante_struc','prez_duplicable_struc', 'prez_durable_struc']
         for head in self.header_tr:
             self.X['{}'.format(head)] = self.X[head].apply(self.preprocesssing)
-        return self.X
+        return self.X.set_index('key_main')
     
 class Keyword_extraction(object):
-    def __init__(self, X):
+    def __init__(self, X, file ='stopwords.txt'):
         self.X = X
         self.header_tr = ['prez_struc', 'prez_produit_struc','prez_marche_struc','prez_zone_struc','prez_objectif_struc', 'prez_innovante_struc','prez_duplicable_struc', 'prez_durable_struc']
-        self.stopwords_file = RefEnv().transformed.format('stopwords.txt')
+        self.stopwords_file = RefEnv().transformed.format(file)
         self.stop_words = self.get_set_stopwords()
         self.lemmatizer = WordNetLemmatizer()
         self.X = self.operation()
@@ -146,35 +149,49 @@ class Keyword_extraction(object):
             return False
 
     def lemmatize_sentence(self, sentence):
-        nltk_tagged = nltk.pos_tag(nltk.word_tokenize(sentence))    
+        try:
+            nltk_tagged = nltk.pos_tag(nltk.word_tokenize(sentence))    
+        except:
+            print(sentence)
         wn_tagged = map(lambda x: (x[0], self.nltk2wn_tag(x[1])), nltk_tagged)
 
         res_words = []
         for word, tag in wn_tagged:
-            if tag is None:                       
+            if tag is None:
                 res_words.append(word)
             else:
                 res_words.append(self.lemmatizer.lemmatize(word, tag))
-
-        return " ".join([wrd for wrd in res_words if self.is_stopword(wrd) == False])
+        sentence = " ".join([wrd for wrd in res_words if wrd not in self.stop_words])
+        assert  'africa' not in sentence.split(' ')
+        return sentence#[wrd for wrd in ' '.join(sentence.split()) if self.is_stopword(wrd) is False]
     
     def operation(self):
+        print(self.stopwords_file)
         for head in self.header_tr:
             self.X['{}_lemm'.format(head)] = self.X[head].apply(self.lemmatize_sentence)
         return self.X
 
-class LDA(object):
+class Models(object):
     from time import time
 
     from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
     from sklearn.decomposition import NMF, LatentDirichletAllocation
     from sklearn.datasets import fetch_20newsgroups
 
-    def __init__(self, n_samples = 2000, n_features = 1000, n_components = 20, n_top_words = 20):
-        self.n_samples = n_samples 
+    def __init__(self, file ='stopwords.txt', n_samples = 2000, n_features = 1000, n_components = 20, n_top_words = 20):
+        self.n_samples = n_samples
         self.n_features = n_features
         self.n_components = n_components
         self.n_top_words = n_top_words
+        self.stopwords_file = RefEnv().transformed.format(file) 
+        self.stop_words = self.get_set_stopwords()
+
+
+    def get_set_stopwords(self):
+        fileName = self.stopwords_file
+        stopword_file = open(fileName, 'r')
+        list_stop_word = [line.split(',') for line in stopword_file.readlines()][0]
+        return set(stopwords.words('english')).union(set(list_stop_word))
 
     def print_top_words(self, model, feature_names, n_top_words):
         for topic_idx, topic in enumerate(model.components_):
@@ -183,8 +200,15 @@ class LDA(object):
                                  for i in topic.argsort()[:-n_top_words - 1:-1]])
             print(message)
         print()
+
+    def get_components(self, model, feature_names, n_top_words):
+        components = {}
+        for topic_idx, topic in enumerate(model.components_):
+            message = {"Topic {}".format(topic_idx) :[feature_names[i] for i in topic.argsort()[:-n_top_words - 1:-1]]}
+            components.update(message)
+        return components
         
-    def perform_lda(self, data_samples):
+    def run_models(self, data_samples):
         t0 = time()
         print("done in %0.3fs." % (time() - t0))
 
@@ -212,27 +236,27 @@ class LDA(object):
               "n_samples=%d and n_features=%d..."
               % (self.n_samples, self.n_features))
         t0 = time()
-        nmf = NMF(n_components=self.n_components, random_state=1,
+        nmf_frobenius = NMF(n_components=self.n_components, random_state=1,
                   alpha=.1, l1_ratio=.5).fit(tfidf)
         print("done in %0.3fs." % (time() - t0))
 
         print("\nTopics in NMF model (Frobenius norm):")
         tfidf_feature_names = tfidf_vectorizer.get_feature_names()
-        self.print_top_words(nmf, tfidf_feature_names, self.n_top_words)
+        self.print_top_words(nmf_frobenius, tfidf_feature_names, self.n_top_words)
 
         # Fit the NMF model
         print("Fitting the NMF model (generalized Kullback-Leibler divergence) with "
               "tf-idf features, n_samples=%d and n_features=%d..."
               % (self.n_samples, self.n_features))
         t0 = time()
-        nmf = NMF(n_components=self.n_components, random_state=1,
+        nmf_kullback = NMF(n_components=self.n_components, random_state=1,
                   beta_loss='kullback-leibler', solver='mu', max_iter=1000, alpha=.1,
                   l1_ratio=.5).fit(tfidf)
         print("done in %0.3fs." % (time() - t0))
 
         print("\nTopics in NMF model (generalized Kullback-Leibler divergence):")
         tfidf_feature_names = tfidf_vectorizer.get_feature_names()
-        self.print_top_words(nmf, tfidf_feature_names, self.n_top_words)
+        self.print_top_words(nmf_kullback, tfidf_feature_names, self.n_top_words)
 
         print("Fitting LDA models with tf features, "
               "n_samples=%d and n_features=%d..."
@@ -242,11 +266,16 @@ class LDA(object):
                                         learning_offset=50.,
                                         random_state=0)
         t0 = time()
-        lda.fit(tf)
+        lda = lda.fit(tf)
         print("done in %0.3fs." % (time() - t0))
 
         print("\nTopics in LDA model:")
         tf_feature_names = tf_vectorizer.get_feature_names()
         self.print_top_words(lda, tf_feature_names, self.n_top_words)
 
-        return lda, tf_feature_names
+        models = {}
+        models['NMF_Kullback'] = {'model':nmf_frobenius, 'feature_names':tfidf_feature_names, 'tf':tfidf, 'vectorizer': tfidf_vectorizer, 'components':self.get_components(nmf_frobenius,tfidf_feature_names,self.n_top_words)}
+        models['NMF_Frobenius'] = {'model':nmf_frobenius, 'feature_names':tfidf_feature_names, 'tf':tfidf, 'vectorizer': tfidf_vectorizer, 'components':self.get_components(nmf_kullback,tfidf_feature_names,self.n_top_words)}
+        models['LDA'] = {'model':lda, 'feature_names':tf_feature_names, 'tf':tf, 'vectorizer':tf_vectorizer, 'components':self.get_components(lda,tfidf_feature_names,self.n_top_words)}
+
+        return models, tf_feature_names
