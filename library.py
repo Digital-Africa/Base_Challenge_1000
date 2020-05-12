@@ -149,10 +149,8 @@ class Keyword_extraction(object):
             return False
 
     def lemmatize_sentence(self, sentence):
-        try:
-            nltk_tagged = nltk.pos_tag(nltk.word_tokenize(sentence))    
-        except:
-            print(sentence)
+
+        nltk_tagged = nltk.pos_tag(nltk.word_tokenize(sentence))    
         wn_tagged = map(lambda x: (x[0], self.nltk2wn_tag(x[1])), nltk_tagged)
 
         res_words = []
