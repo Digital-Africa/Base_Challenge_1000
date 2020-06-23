@@ -113,7 +113,7 @@ class Models(object):
 	from sklearn.decomposition import NMF, LatentDirichletAllocation
 	from sklearn.datasets import fetch_20newsgroups
 
-	def __init__(self,to_exclude, file ='stopwords.txt',distance_NMF = 'Frobenius', n_samples = 2000, n_features = 1000, n_components = 20, n_top_words = 20):
+	def __init__(self,to_exclude = None, file ='stopwords.txt',distance_NMF = 'Frobenius', n_samples = 2000, n_features = 1000, n_components = 20, n_top_words = 20):
 		self.n_samples = n_samples
 		self.n_features = n_features
 		self.n_components = n_components

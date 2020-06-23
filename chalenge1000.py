@@ -36,8 +36,9 @@ class Native(object): ###allows to get df1_clean with 6 columns : 'categorie','a
 	"""docstring for RefEnv"""
 	def __init__(self):
 		self.X = pandas.read_csv(RefEnv().transformed.format('df1_clean.csv'))
+		self.ALL = self.operation().set_index('key_main') 
 		self.X = self.operation().set_index('key_main')#[['nom_struc','categorie','age_pers','nbr_salarie','ca_2017','ca_2018','ca_2019','pays_struc1','date_struc','prix_struc','linkedin_struc','email_pers']] 
-		self.descriptions = self.operation()[['prez_struc', 'prez_produit_struc','prez_marche_struc','prez_zone_struc','prez_objectif_struc', 'prez_innovante_struc','prez_duplicable_struc', 'prez_durable_struc']]
+		self.descriptions = self.operation()[['nom_struc','prez_struc', 'prez_produit_struc','prez_marche_struc','prez_zone_struc','prez_objectif_struc', 'prez_innovante_struc','prez_duplicable_struc', 'prez_durable_struc']]
 		self.descriptions_trad = self.get_trans()
 		self.text = self.operation_text()
 		self.X = self.X[['nom_struc','categorie','age_pers','nbr_salarie','ca_2017','ca_2018','ca_2019','pays_struc1','date_struc','prix_struc','linkedin_struc','email_pers']]

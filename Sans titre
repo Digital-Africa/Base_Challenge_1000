@@ -1,0 +1,33 @@
+def check_site(site):
+    try:
+        if site.startswith('https:'):
+            text = re.sub(r'https://', '', site)
+            text = re.sub(r'www.', '', text)
+            text = re.sub(r'/$', '', text)
+            conn = http.client.HTTPSConnection(text)
+            conn.request("GET", "/")
+            rep = conn.getresponse().status
+
+        elif site.startswith('http:'):
+            text = re.sub(r'http://', '', site)
+            text = re.sub(r'www.', '', text)
+            text = re.sub(r'/$', '', text)
+            conn = http.client.HTTPConnection(text)
+            conn.request("GET", "/")
+            rep = conn.getresponse().status
+        
+        elif site.startswith('www.'):
+            text=re.sub(r'www.', '', site)
+            text = re.sub(r'/$', '', text)
+            conn = http.client.HTTPConnection(text)
+            conn.request("GET", "/")
+            rep = conn.getresponse().status
+            if rep == 301:
+                conn = http.client.HTTPSConnection(text)
+                conn.request("GET", "/")
+                rep = conn.getresponse().status
+
+        return rep
+            
+    except:
+        return 'error'
