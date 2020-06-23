@@ -32,6 +32,115 @@ class RefEnv(object):
 		self.path_PROJECT_DATA = path_PROJECT_DATA
 		self.transformed = '{}/Open Data Platform/DATA/Transformed/{}'.format(self.path_PROJECT_DATA, '{}') ### how exactly is working .format(, '{}') ?
 
+class Native_1(object): 
+	"""docstring for RefEnv"""
+	def __init__(self):
+		self.X = pandas.read_csv(RefEnv().transformed.format('df_new.csv')).set_index('key_main')
+		self.X = self.operation()
+		self.descriptions = self.X[['nom_struc', 'prez_struc', 'prez_produit_struc','prez_marche_struc','prez_zone_struc','prez_objectif_struc', 'prez_innovante_struc','prez_duplicable_struc', 'prez_durable_struc']]
+		self.descriptions_trad = self.get_trans()
+		self.template = self.X[['cat_struc', 'temp']]
+		self.df = self.X[['nom_pers', 'prenom_pers', 'email_pers', 'nom_struc', 'site_struc', 'cat_struc', 'status', 'date_struc', 'age','pays_struc1','empl_struc','ca_2017','ca_2018','ca_2019','prix_struc','linkedin_struc']]
+		#self.X = self.X[['nom_struc','categorie','age_pers','nbr_salarie','ca_2017','ca_2018','ca_2019','pays_struc1','date_struc','prix_struc','linkedin_struc','email_pers']]
+
+	def get_trans(self):
+		frame = pandas.read_json(RefEnv().transformed.format('traduct.json')).set_index('key_main')
+		frame.columns = ['prez_struc', 'prez_produit_struc','prez_marche_struc','prez_zone_struc','prez_objectif_struc', 'prez_innovante_struc','prez_duplicable_struc', 'prez_durable_struc']
+		return frame
+	
+	def template(self, nom, prenom, email, struc, origine, activite, site, linkedin, prez, produit, marche, zone, objectif, innovant, duplicable, durable):
+		description = 'Nom du répondant : {nom} \nPrénom du répondant : {prenom} \nemail : {email} \n \nNom de la structure : {struc} \nPays d\'origine : {origine} \nPays d\'activité : {activite} \nSite internet : {site} \nLinkedin : {linkedin} \n \nPrésentation de la structure \n{prez} \n \nPrésentation du produit, de la solution phare porté par la structure \n{produit} \n \nSur quel marché et vers quelle cible \n{marche} \n \nZone géographique de l’activité \n{zone} \n \nObjectifs de croissance et vision à moyen et long terme du marché \n{objectif} \n \nEn quoi votre solution est elle innovante \n{innovant} \n \nEn quoi est elle duplicable à moindre coût \n{duplicable} \n \nEn quoi votre solution rend les villes françaises et africaines plus durables du point de vue environnemental et social \n{durable} \n \n'.format(nom = nom, prenom = prenom, email = email, struc = struc, origine = origine, activite = activite, site = site, linkedin = linkedin, prez = prez, produit = produit, marche = marche, zone = zone, objectif = objectif, innovant = innovant, duplicable = duplicable, durable = durable)
+		return description
+
+	def check_site(self, site):
+		try:
+			if site.startswith('https:'):
+				text = re.sub(r'https://', '', site)
+				text = re.sub(r'www.', '', text)
+				text = re.sub(r'/$', '', text)
+				conn = http.client.HTTPSConnection(text)
+
+			elif site.startswith('http:'):
+				text = re.sub(r'http://', '', site)
+				text = re.sub(r'www.', '', text)
+				text = re.sub(r'/$', '', text)
+				conn = http.client.HTTPConnection(text)
+			
+			elif site.startswith('www.'):
+				text=re.sub(r'www.', '', site)
+				text = re.sub(r'/$', '', text)
+				conn = http.client.HTTPConnection(text)
+				conn.request("GET", "/")
+				rep = conn.getresponse().status
+				if rep == 301:
+					conn = http.client.HTTPSConnection(text)
+			
+			conn.request("GET", "/")
+			rep = conn.getresponse().status
+			return rep
+			
+		except:
+			return 'error'
+
+	def check_neg(self, text):
+		if text!= text:
+			return 0
+		else:
+			text = str(text)
+			text = unidecode.unidecode(re.sub('[^\w ]','',text.lower()))
+			if re.search(r'\b(non)\b|\b(no)\b|\b(ne)\b|\b(pas)\b|\b(not)\b|\b(none)\b', text):
+				return 2
+			elif len(text)<10:
+				return 3
+			else:
+				return 1
+
+	def grow(self, x, y):
+		if y != 0:
+			return (x - y)/y*100
+		else:
+			return float('NaN')
+
+	def filtre(self, narg, col, cond, value, select='null'):
+		df=self.X
+		if narg==1:
+			if cond=='eq':
+				df = df[df[col].isin(value)]
+			elif cond=='leq':
+				df = df[df[col] <= value]
+			elif cond=='geq':
+				df = df[df[col] >= value]
+			elif cond=='inf':
+				df = df[df[col] < value]
+			elif cond=='sup':
+				df = df[df[col] > value]
+		elif narg>1:
+			for i in range(narg):
+				if cond[i]=='eq':
+					df = df[df[col[i]].isin(value[i])]
+				elif cond[i]=='leq':
+					df = df[df[col[i]] <= value[i]]
+				elif cond[i]=='geq':
+					df = df[df[col[i]] >= value[i]]
+				elif cond[i]=='inf':
+					df = df[df[col[i]] < value[i]]
+				elif cond[i]=='sup':
+					df = df[df[col[i]] > value[i]]
+		if select=='null':
+			return df
+		else:
+			return df[select]
+
+	def operation(self):
+		self.X['temp'] = self.X.apply(lambda x: self.template(x['nom_pers'], x['prenom_pers'], x['email_pers'],x['nom_struc'], x['pays_struc1'], x['pays_struc2'], x['site_struc'],x['linkedin_struc'], x['prez_struc'],x['prez_produit_struc'], x['prez_marche_struc'], x['prez_zone_struc'],x['prez_objectif_struc'], x['prez_innovante_struc'], x['prez_duplicable_struc'],x['prez_durable_struc']), axis=1)
+		self.X['site_status'] = self.X['site_struc'].apply(self.check_site)
+		self.X['check_invest'] = self.X['investisseur_struc'].apply(self.check_neg)
+		self.X['check_prix'] = self.X['prix_struc'].apply(self.check_neg)
+		self.X['check_incub'] = self.X['incubateur_struc'].apply(self.check_neg)
+		self.X['ca_grow_1819'] = self.X.apply(lambda x: self.grow(x['ca_2019'],x['ca_2018']), axis=1)
+		self.X['ca_grow_1718'] = self.X.apply(lambda x: self.grow(x['ca_2018'],x['ca_2017']), axis=1)
+		return self.X
+		
 class Native(object): ###allows to get df1_clean with 6 columns : 'categorie','age_pers','nbr_salarie','ca_2017','ca_2018','ca_2019' and key_main as index => this is X dataframe. The dataframe text gets only the presentation from df1_clean and the index
 	"""docstring for RefEnv"""
 	def __init__(self):
