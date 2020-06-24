@@ -13,6 +13,9 @@ import string
 import time
 from nltk.corpus import wordnet
 
+import unidecode
+import http.client
+
 import requests
 import urllib.parse
 
