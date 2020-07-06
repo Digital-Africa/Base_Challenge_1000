@@ -46,7 +46,7 @@ class Lemm(object): # returns a dataframe with new columns that are lemmatized w
 		return re.sub(r'\d+','', element)
 
 	def remove_punctuation(self, element):
-		return element.translate(str.maketrans('', '', string.punctuation))
+		return re.sub(r'[^\w\s]', ' ', element)
 
 	def remove_special_char(self, element):
 		return element.replace('\r\n', ' ').replace('\t',' ').replace('/', ' ')
