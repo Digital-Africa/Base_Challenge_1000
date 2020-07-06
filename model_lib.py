@@ -113,11 +113,14 @@ class Models(object):
 	from sklearn.decomposition import NMF, LatentDirichletAllocation
 	from sklearn.datasets import fetch_20newsgroups
 
-	def __init__(self,to_exclude = None, file ='stopwords.txt',distance_NMF = 'Frobenius', n_samples = 2000, n_features = 1000, n_components = 20, n_top_words = 20):
+	def __init__(self,to_exclude = None, file ='stopwords.txt',distance_NMF = 'Frobenius', n_samples = 2000, n_features = 1000, n_components = 20, n_top_words = 20, vocabulary = None, doc_topic_prior = None, topic_word_prior = None):
 		self.n_samples = n_samples
 		self.n_features = n_features
 		self.n_components = n_components
 		self.n_top_words = n_top_words
+		self.vocabulary = vocabulary
+		self.doc_topic_prior = doc_topic_prior
+		self.topic_word_prior = topic_word_prior
 		self.stopwords_file = RefEnv().transformed.format(file) 
 		self.stop_words = self.get_set_stopwords()
 		self.distance_NMF = distance_NMF
@@ -235,7 +238,8 @@ class Models(object):
 		print("Extracting tf-idf features for NMF...")
 		tfidf_vectorizer = TfidfVectorizer(max_df=0.95, min_df=2,
 										   max_features=self.n_features,
-										   stop_words='english')
+										   stop_words='english',
+										   vocabulary =self.vocabulary)
 		t0 = time()
 		tfidf = tfidf_vectorizer.fit_transform(data_samples)
 		print("done in %0.3fs." % (time() - t0))
@@ -243,8 +247,8 @@ class Models(object):
 
 		# Fit the NMF model
 		print("Fitting the NMF model (Frobenius norm) with tf-idf features, "
-			  "n_samples=%d and n_features=%d..."
-			  % (self.n_samples, self.n_features)) # how does % works to fill missing text ? 
+			  "n_features=%d..."
+			  % (self.n_features)) # how does % works to fill missing text ? 
 		t0 = time()
 		nmf_frobenius = NMF(n_components=self.n_components, random_state=1,
 				  alpha=.1, l1_ratio=.5).fit(tfidf)
@@ -267,7 +271,8 @@ class Models(object):
 		print("Extracting tf features for LDA...")
 		tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2,
 										max_features=self.n_features,
-										stop_words='english')
+										stop_words='english',
+										vocabulary = self.vocabulary)
 		t0 = time()
 		tf = tf_vectorizer.fit_transform(data_samples)
 		print("done in %0.3fs." % (time() - t0))
@@ -289,12 +294,14 @@ class Models(object):
 		#self.print_top_words(nmf_kullback, tfidf_feature_names, self.n_top_words)
 
 		print("Fitting LDA models with tf features, "
-			 "n_samples=%d and n_features=%d..."
-			 % (self.n_samples, self.n_features))
+			 "n_features=%d..."
+			 % (self.n_features))
 		lda = LatentDirichletAllocation(n_components=self.n_components, max_iter=5,
 										learning_method='online',
 										learning_offset=50.,
-										random_state=0)
+										random_state=0, 
+										doc_topic_prior = self.doc_topic_prior,
+										topic_word_prior = self.topic_word_prior)
 		t0 = time()
 		lda = lda.fit(tf)
 		print("done in %0.3fs." % (time() - t0))
