@@ -1,0 +1,138 @@
+index;label;variable;completion rate;file;count;mean;std;min;25%;50%;75%;max;unique;top;freq;type;nombre de type var
+labels_categories;labels;categories;;;;;;;;;;;;;;;
+template_temp;template;temp;;;;;;;;;;;;;;;
+team_empl_h_struc;team;empl_h_struc;100.0;team;3449.0;31.714120034792693;1203.6522112417404;0.0;2.0;4.0;6.0;70272.0;;;;<class 'int'>;1
+team_empl_f_struc;team;empl_f_struc;100.0;team;3449.0;28.098579298347346;622.8517093821175;0.0;2.0;3.0;5.0;30000.0;;;;<class 'int'>;1
+url_descriptions_formal_prez_doc_struc;url_descriptions_formal;prez_doc_struc;53.58074804291099;url_descriptions_formal;1848;;;;;;;;1847;http://digital-africa.co/uploads/formidable/2/Company-Profile-17.pdf;2;<class 'str'>/<class 'float'>;2
+url_descriptions_formal_logo_struc;url_descriptions_formal;logo_struc;94.89707161496086;url_descriptions_formal;3273;;;;;;;;3272;http://digital-africa.co/uploads/formidable/2/Logo-11.png;2;<class 'str'>/<class 'float'>;2
+url_descriptions_formal_video_struc;url_descriptions_formal;video_struc;36.53232821107567;url_descriptions_formal;1260;;;;;;;;1250;https://www.youtube.com/watch?v=esTPbb29HqQ;3;<class 'str'>/<class 'float'>;2
+descriptions_raw_nom_struc;descriptions_raw;nom_struc;100.0;descriptions_raw;3449;;;;;;;;3404;Entreprise individuelle;5;<class 'str'>;1
+descriptions_raw_prez_struc;descriptions_raw;prez_struc;100.0;descriptions_raw;3449;;;;;;;;3442;"SMART CARD est une startup malienne évoluant dans le domaine de la sécurité des engins (spécialement les motos qui est le principal moyen de déplacement dans les pays d’Afrique de l’ouest) en se basant sur un procède innovant et unique qui utilisant un mini traceur smart GPS afin de prémunir les utilisateurs des récurrents cas de vol. 
+Le système consiste à prendre de contrôle de l’engin même à distance (localisation avec précision, coupure du moteur à distance, etc.). L’innovation vient du concept de la carte à puce qui est une offre unique dans ce domaine. Le partenariat avec l’usine TOPTEN TRACKER GPS, leader sur le marché des traceurs GPS a permis de mettre en place un traceur GPS miniature (smart card) conçu spécialement pour les motos.
+Elle a actuellement dépassé les phases de prototypage et de test, déclenchant ainsi les étapes liées à l’obtention d’un brevet pour la propriété intellectuelle ainsi qu’une licence de production et de commercialisation d’où l’industrialisation du processus de fabrication.";2;<class 'str'>;1
+descriptions_raw_prez_produit_struc;descriptions_raw;prez_produit_struc;99.94201217744273;descriptions_raw;3447;;;;;;;;3441;Distributeur d'acier, de ciment et adjuvants ainsi que de fibre optique.;2;<class 'str'>/<class 'float'>;2
+descriptions_raw_prez_marche_struc;descriptions_raw;prez_marche_struc;100.0;descriptions_raw;3449;;;;;;;;3436;National et international;3;<class 'str'>;1
+descriptions_raw_prez_zone_struc;descriptions_raw;prez_zone_struc;90.48999710060887;descriptions_raw;3121;;;;;;;;2945;Afrique;19;<class 'str'>/<class 'float'>;2
+descriptions_raw_prez_objectif_struc;descriptions_raw;prez_objectif_struc;99.97100608872137;descriptions_raw;3448;;;;;;;;3435;5ans;5;<class 'str'>/<class 'float'>;2
+descriptions_raw_prez_innovante_struc;descriptions_raw;prez_innovante_struc;100.0;descriptions_raw;3449;;;;;;;;3445;"Social Lender uses its own proprietary algorithm to perform a social audit of the users’ online, on mobile, on social media and other related platforms and give a Social Reputation Score to each user. Users can borrow from banks and other <U+FB01>nancial institutions based on their Social Reputation Score. Social Reputation Score can be improved by providing more information e.g. social reputation score is improved by the introduction of Social Guarantor who provides electronic personal guarantee on the personality of the borrower or the transaction
+
+Social Lender delivers cash guaranteed by social reputation in most cases within 10 minutes. In three easy steps, users are able to get quick cash from Social Lender. First, users access Social Lender’s platform using any of the following channels; Web, SMS, USSD, Mobile App (Partner App Add-On or Dedicated Apps), Partner Bank ATMs, APIs or Pay with Social Lender (E-commerce Checkout). Immediately, a social audit is conducted on the user (with user's permission) and the user obtains a social reputation score based on their digital fingerprint. Second, the user applies for cash using any of the available channels. Third, funds are approved based on partner specific business rules and funds are disbursed to the users' verified Account (Bank Account or Mobile Money Account) usually within 10 minutes.";2;<class 'str'>;1
+descriptions_raw_prez_duplicable_struc;descriptions_raw;prez_duplicable_struc;99.79704262104958;descriptions_raw;3442;;;;;;;;3431;.;3;<class 'str'>/<class 'float'>;2
+descriptions_raw_prez_durable_struc;descriptions_raw;prez_durable_struc;99.94201217744273;descriptions_raw;3447;;;;;;;;3439;As aforementioned, our solution can create greater inclusion in the long-term digital economy. People from anywhere, be it African or French cities, can make payment right from their web-enabled device in a simple click. Various LSMs and locations can transact, reducing exclusion and allowing others to advance into from growing industries/innovations such as eCommerce, eBilling, etc.;2;<class 'str'>/<class 'float'>;2
+descriptions_traduction_nom_struc;descriptions_traduction;nom_struc;100.0;descriptions_traduction;3449;;;;;;;;3404;Entreprise individuelle;5;<class 'str'>;1
+descriptions_traduction_prez_struc;descriptions_traduction;prez_struc;100.0;descriptions_traduction;3449;;;;;;;;3442;"SMART CARD est une startup malienne évoluant dans le domaine de la sécurité des engins (spécialement les motos qui est le principal moyen de déplacement dans les pays d’Afrique de l’ouest) en se basant sur un procède innovant et unique qui utilisant un mini traceur smart GPS afin de prémunir les utilisateurs des récurrents cas de vol. 
+Le système consiste à prendre de contrôle de l’engin même à distance (localisation avec précision, coupure du moteur à distance, etc.). L’innovation vient du concept de la carte à puce qui est une offre unique dans ce domaine. Le partenariat avec l’usine TOPTEN TRACKER GPS, leader sur le marché des traceurs GPS a permis de mettre en place un traceur GPS miniature (smart card) conçu spécialement pour les motos.
+Elle a actuellement dépassé les phases de prototypage et de test, déclenchant ainsi les étapes liées à l’obtention d’un brevet pour la propriété intellectuelle ainsi qu’une licence de production et de commercialisation d’où l’industrialisation du processus de fabrication.";2;<class 'str'>;1
+descriptions_traduction_prez_produit_struc;descriptions_traduction;prez_produit_struc;99.94201217744273;descriptions_traduction;3447;;;;;;;;3441;Distributeur d'acier, de ciment et adjuvants ainsi que de fibre optique.;2;<class 'str'>/<class 'float'>;2
+descriptions_traduction_prez_marche_struc;descriptions_traduction;prez_marche_struc;100.0;descriptions_traduction;3449;;;;;;;;3436;National et international;3;<class 'str'>;1
+descriptions_traduction_prez_zone_struc;descriptions_traduction;prez_zone_struc;90.48999710060887;descriptions_traduction;3121;;;;;;;;2945;Afrique;19;<class 'str'>/<class 'float'>;2
+descriptions_traduction_prez_objectif_struc;descriptions_traduction;prez_objectif_struc;99.97100608872137;descriptions_traduction;3448;;;;;;;;3435;5ans;5;<class 'str'>/<class 'float'>;2
+descriptions_traduction_prez_innovante_struc;descriptions_traduction;prez_innovante_struc;100.0;descriptions_traduction;3449;;;;;;;;3445;"Social Lender uses its own proprietary algorithm to perform a social audit of the users’ online, on mobile, on social media and other related platforms and give a Social Reputation Score to each user. Users can borrow from banks and other <U+FB01>nancial institutions based on their Social Reputation Score. Social Reputation Score can be improved by providing more information e.g. social reputation score is improved by the introduction of Social Guarantor who provides electronic personal guarantee on the personality of the borrower or the transaction
+
+Social Lender delivers cash guaranteed by social reputation in most cases within 10 minutes. In three easy steps, users are able to get quick cash from Social Lender. First, users access Social Lender’s platform using any of the following channels; Web, SMS, USSD, Mobile App (Partner App Add-On or Dedicated Apps), Partner Bank ATMs, APIs or Pay with Social Lender (E-commerce Checkout). Immediately, a social audit is conducted on the user (with user's permission) and the user obtains a social reputation score based on their digital fingerprint. Second, the user applies for cash using any of the available channels. Third, funds are approved based on partner specific business rules and funds are disbursed to the users' verified Account (Bank Account or Mobile Money Account) usually within 10 minutes.";2;<class 'str'>;1
+descriptions_traduction_prez_duplicable_struc;descriptions_traduction;prez_duplicable_struc;99.79704262104958;descriptions_traduction;3442;;;;;;;;3431;.;3;<class 'str'>/<class 'float'>;2
+descriptions_traduction_prez_durable_struc;descriptions_traduction;prez_durable_struc;99.94201217744273;descriptions_traduction;3447;;;;;;;;3439;As aforementioned, our solution can create greater inclusion in the long-term digital economy. People from anywhere, be it African or French cities, can make payment right from their web-enabled device in a simple click. Various LSMs and locations can transact, reducing exclusion and allowing others to advance into from growing industries/innovations such as eCommerce, eBilling, etc.;2;<class 'str'>/<class 'float'>;2
+descriptions_traduction_categorie;descriptions_traduction;categorie;;;;;;;;;;;;;;;
+finance_ca_2017;finance;ca_2017;60.249347636996234;finance;2078.0;253718.46090432917;3818437.3389021386;-15000.0;0.0;1236.0;18273.0;117166225.0;;;;<class 'float'>;1
+finance_ca_2017_devise;finance;ca_2017_devise;59.95940852420991;finance;;;;;;;;;;;;<class 'str'>/<class 'float'>;2
+finance_ca_2018;finance;ca_2018;69.58538706871556;finance;2400.0;1172434.6945153645;41095601.211808614;-50000.0;5.89;5000.0;30000.0;2000000000.0;;;;<class 'float'>;1
+finance_ca_2018_devise;finance;ca_2018_devise;74.51435198608291;finance;;;;;;;;;;;;<class 'str'>/<class 'float'>;2
+finance_ca_2019_devise;finance;ca_2019_devise;100.0;finance;;;;;;;;;;;;<class 'str'>;1
+finance_ca_2019_trim1;finance;ca_2019_trim1;100.0;finance;3449.0;390589.5502272911;17067981.28995229;-10000.0;2.0;1800.0;10000.0;1000000000.0;;;;<class 'float'>;1
+finance_ca_2019_trim2;finance;ca_2019_trim2;100.0;finance;3449.0;1133321.3671136238;51689879.63704527;-5000.0;50.0;2500.0;12672.0;3000000000.0;;;;<class 'float'>;1
+finance_ca_2019_trim3;finance;ca_2019_trim3;100.0;finance;3449.0;1618332.1169498286;85161597.8353741;-9000.0;500.0;4000.0;19500.0;5000000000.0;;;;<class 'float'>;1
+structure_nom_struc;structure;nom_struc;100.0;structure;3449;;;;;;;;3404;Entreprise individuelle;5;<class 'str'>;1
+structure_date_struc;structure;date_struc;100.0;structure;3449;;;;;;;;1777;2020-01-01;16;<class 'str'>;1
+structure_type_struc;structure;type_struc;100.0;structure;3449;;;;;;;;872;SARL;699;<class 'str'>;1
+structure_num_struc;structure;num_struc;99.82603653232822;structure;3443;;;;;;;;3280;1;62;<class 'str'>/<class 'float'>;2
+structure_pays_struc1;structure;pays_struc1;100.0;structure;3449;;;;;;;;97;Nigeria;332;<class 'str'>;1
+structure_certif_struc;structure;certif_struc;95.07103508263265;structure;3279;;;;;;;;3278;http://digital-africa.co/uploads/formidable/2/COR14.2.pdf;2;<class 'str'>/<class 'float'>;2
+structure_adresse_struc;structure;adresse_struc;91.91069875326181;structure;3170;;;;;;;;3130;Nouakchott;5;<class 'str'>/<class 'float'>;2
+structure_ville_struc;structure;ville_struc;100.0;structure;3449;;;;;;;;946;Abidjan;122;<class 'str'>;1
+structure_region_struc;structure;region_struc;79.61728037112206;structure;2746;;;;;;;;1034;Gauteng;117;<class 'str'>/<class 'float'>;2
+structure_pays_struc2;structure;pays_struc2;100.0;structure;3449;;;;;;;;98;Nigeria;336;<class 'str'>;1
+structure_cat_sub1_struc;structure;cat_sub1_struc;100.0;structure;3449;;;;;;;;14;Nourrir les villes;506;<class 'str'>;1
+structure_cat_sub2_struc;structure;cat_sub2_struc;84.343287909539;structure;2909;;;;;;;;14;Accéder aux services essentiels;416;<class 'str'>/<class 'float'>;2
+structure_cat_sub3_struc;structure;cat_sub3_struc;69.0634966657002;structure;2382;;;;;;;;14;Vivre dans la ville;258;<class 'str'>/<class 'float'>;2
+structure_cat_struc;structure;cat_struc;91.50478399536098;structure;3156;;;;;;;;24;Agriculture, territoires ruraux et ressources naturelles;420;<class 'str'>/<class 'float'>;2
+structure_cat_autre_struc;structure;cat_autre_struc;5.682806610611777;structure;196;;;;;;;;184;Architecture;3;<class 'str'>/<class 'float'>;2
+structure_site_struc;structure;site_struc;100.0;structure;3449;;;;;;;;3421;http://www.cbdibaong.org;10;<class 'str'>;1
+structure_linkedin_struc;structure;linkedin_struc;42.070165265294285;structure;1451;;;;;;;;1422;https://www.linkedin.com/feed/;12;<class 'str'>/<class 'float'>;2
+structure_facebook_struc;structure;facebook_struc;53.55175413163236;structure;1847;;;;;;;;1816;https://www.facebook.com/;4;<class 'str'>/<class 'float'>;2
+structure_twitter_struc;structure;twitter_struc;31.54537547115106;structure;1088;;;;;;;;1067;https://twitter.com/home;6;<class 'str'>/<class 'float'>;2
+structure_instagram_struc;structure;instagram_struc;26.732386198898226;structure;922;;;;;;;;904;https://www.instagram.com/?hl=en;5;<class 'str'>/<class 'float'>;2
+structure_incubateur_struc;structure;incubateur_struc;73.06465642215134;structure;2520;;;;;;;;2034;No;179;<class 'str'>/<class 'float'>;2
+structure_partenaire_struc;structure;partenaire_struc;66.22209336039433;structure;2284;;;;;;;;2148;None;36;<class 'str'>/<class 'float'>;2
+structure_prix_struc;structure;prix_struc;58.190779936213396;structure;2007;;;;;;;;1745;None;72;<class 'str'>/<class 'float'>;2
+structure_investisseur_struc;structure;investisseur_struc;48.50681356915048;structure;1673;;;;;;;;1279;None;102;<class 'str'>/<class 'float'>;2
+people_nom_prenom_diff2;people;nom_prenom_diff2;9.336039431719342;people;322;;;;;;;;322;DJIMA Kossi Jean;1;<class 'str'>/<class 'float'>;2
+people_nation_diff1;people;nation_diff1;9.625978544505656;people;332;;;;;;;;35;Cameroun;52;<class 'str'>/<class 'float'>;2
+people_fonda_diff;people;fonda_diff;99.21716439547696;people;3422;;;;;;;;4;Non;1631;<class 'str'>/<class 'float'>;2
+people_nation_diff3;people;nation_diff3;3.0443606842563042;people;105;;;;;;;;29;Cameroun;20;<class 'str'>/<class 'float'>;2
+people_civil_diff3;people;civil_diff3;4.697013627138304;people;162;;;;;;;;4;M;69;<class 'str'>/<class 'float'>;2
+people_nom_prenom_diff1;people;nom_prenom_diff1;9.625978544505656;people;332;;;;;;;;329;Emmanuel Foka Ziegoube;2;<class 'str'>/<class 'float'>;2
+people_nation_diff2;people;nation_diff2;5.827776167004927;people;201;;;;;;;;31;Cameroun;27;<class 'str'>/<class 'float'>;2
+people_civil_diff1;people;civil_diff1;9.625978544505656;people;332;;;;;;;;2;M;253;<class 'str'>/<class 'float'>;2
+people_nom_prenom_diff3;people;nom_prenom_diff3;4.89997100608872;people;169;;;;;;;;168;SATHIE COMARA;2;<class 'str'>/<class 'float'>;2
+people_civil_diff2;people;civil_diff2;5.624818788054512;people;194;;;;;;;;2;M;139;<class 'str'>/<class 'float'>;2
+people_civil_pers;people;civil_pers;100.0;people;3449;;;;;;;;4;M;1412;<class 'str'>;1
+people_nom_pers;people;nom_pers;100.0;people;3449;;;;;;;;3085;Ndiaye;11;<class 'str'>;1
+people_prenom_pers;people;prenom_pers;100.0;people;3449;;;;;;;;2945;Ahmed;20;<class 'str'>;1
+people_nation_pers;people;nation_pers;100.0;people;3449;;;;;;;;104;Nigeria;341;<class 'str'>;1
+people_age_pers;people;age_pers;100.0;people;3449;;;;;;;;6;25-34;1838;<class 'str'>;1
+people_parcours_pers;people;parcours_pers;100.0;people;3449;;;;;;;;3441;"Amadou DIAWARA, 37 ans. De nationalité Franco-Malienne, Il a grandi entre le Mali et la France ou il y étudie
+les métiers de l’Informatique et du Commerce.
+Titulaire d’un Baccalauréat en science, il passe alors un BTS en informatique de gestion puis un DESS en
+ingénierie des génies logiciels au sein de l’IPAG Paris.
+S’en suivra un long parcours dans différentes grandes sociétés françaises et internationales (Olivetti, Bull,
+HP…).
+Marié et père de quatre enfants il Retourne au Mali en 2010 afin de se lancer dans l’ingénierie informatique.
+En 2017, il obtient une certification en Blockchain.
+Il est aujourd’hui :
+- PDG du Groupe FAMIB présent au Mali, en France, au Niger et en Côte d’Ivoire qui emploie plus de
+107 personnes.
+- Editeur des solutions KINGUI :
+- Incubateur en ligne FAMIB Labs ;
+- Média KINGUI Actu, Web TV ;
+- Agence de communication Digital Créatis ;
+- Plateforme de vente en ligne KINGUI Express ;
+- Service de SMS Banking Digital Framework ;
+- Fourniture et assemblage de mobilier ergonomique FSR Office ;
+- Président Fondateur de l’Université Virtuelle du Mali UPP KINGUI ;
+- Vice-président du Forum sur la Gouvernance de l’Internet au Mali ;
+- CEO de la Société XAALISI SAS, créateur des crypto-monnaies Xaalisi, MaliWari, Eburnie Coin, de la
+plateforme d’échange crypto KINGUI Coin et du premier restaurant crypto en Afrique ;
+- Experts en E-Gouv et transformation digitale ;
+- Consultant Blockchain ;
+- Fondateur de KINGUILAND, Centre de Recherche et d’Innovation Technologique ;
+- Membre du chapitre malien de ISOC (Internet Society) ;
+- Membre du Club des Investisseurs Européens ;
+- Membre de ASIM (Association des Sociétés Informatique du Mali ;
+- Représentant du Mali au CINVU (COMSTECH Inter-Islamic Network on Virtual University) ;
+- Membre du CAUDEV (Consortium Africain Universitaire pour le Développement de l’Enseignement
+Virtuel) ;
+- Membre de AUNEGe (Association des Universités pour le développement de l’enseignement
+numérique en Economie et Gestion) en France, réseau des Universités Numérique Thématique (UNT).";3;<class 'str'>;1
+people_email_pers;people;email_pers;100.0;people;3449;;;;;;;;3397;adiawara@famibmali.com;4;<class 'str'>;1
+people_mobile_pers;people;mobile_pers;100.0;people;3449;;;;;;;;3406;+223 75371817;4;<class 'str'>;1
+people_fixe_pers;people;fixe_pers;50.10147868947521;people;1728;;;;;;;;1701;+223 20290590;4;<class 'str'>/<class 'float'>;2
+people_linkedin_pers;people;linkedin_pers;64.16352565961148;people;2213;;;;;;;;2154;https://www.linkedin.com/feed/;26;<class 'str'>/<class 'float'>;2
+people_twitter_pers;people;twitter_pers;38.44592635546535;people;1326;;;;;;;;1295;https://twitter.com/home;11;<class 'str'>/<class 'float'>;2
+people_fonction_pers;people;fonction_pers;100.0;people;3449;;;;;;;;1569;CEO;337;<class 'str'>;1
+people_id_pers;people;id_pers;80.19715859669469;people;2766;;;;;;;;2765;http://digital-africa.co/uploads/formidable/2/PassportHD.pdf;2;<class 'str'>/<class 'float'>;2
+people_lang_pers;people;lang_pers;99.50710350826327;people;3432;;;;;;;;258;English;1091;<class 'str'>/<class 'float'>;2
+digital_ponctual_reco_digitafr;digital_ponctual;reco_digitafr;100.0;digital_ponctual;;;;;;;;;;;;<class 'str'>;1
+digital_ponctual_cgu_digitafr;digital_ponctual;cgu_digitafr;100.0;digital_ponctual;;;;;;;;;;;;<class 'str'>;1
+digital_ponctual_nwsl_digitafr;digital_ponctual;nwsl_digitafr;100.0;digital_ponctual;;;;;;;;;;;;<class 'str'>;1
+digital_ponctual_compte_label_digitafr;digital_ponctual;compte_label_digitafr;97.99942012177442;digital_ponctual;;;;;;;;;;;;<class 'str'>/<class 'float'>;2
+digital_ponctual_compte_digitafr;digital_ponctual;compte_digitafr;97.99942012177442;digital_ponctual;;;;;;;;;;;;<class 'str'>/<class 'float'>;2
+digital_ponctual_mdp_digitafr;digital_ponctual;mdp_digitafr;0.0;digital_ponctual;0.0;;;;;;;;;;;<class 'float'>;1
+digital_ponctual_iduser_digitafr;digital_ponctual;iduser_digitafr;16.439547694984057;digital_ponctual;;;;;;;;;;;;<class 'str'>/<class 'float'>;2
+digital_ponctual_time_digitafr;digital_ponctual;time_digitafr;100.0;digital_ponctual;;;;;;;;;;;;<class 'str'>;1
+digital_ponctual_last_update_digitafr;digital_ponctual;last_update_digitafr;100.0;digital_ponctual;;;;;;;;;;;;<class 'str'>;1
+digital_ponctual_created_by_digitafr;digital_ponctual;created_by_digitafr;16.439547694984057;digital_ponctual;;;;;;;;;;;;<class 'str'>/<class 'float'>;2
+digital_ponctual_updated_by_digitafr;digital_ponctual;updated_by_digitafr;16.439547694984057;digital_ponctual;;;;;;;;;;;;<class 'str'>/<class 'float'>;2
+digital_ponctual_draft_digitafr;digital_ponctual;draft_digitafr;100.0;digital_ponctual;3449.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;;;;<class 'int'>;1
+digital_ponctual_ip_digitafr;digital_ponctual;ip_digitafr;100.0;digital_ponctual;;;;;;;;;;;;<class 'str'>;1
+digital_ponctual_id_digitafr;digital_ponctual;id_digitafr;100.0;digital_ponctual;3449.0;1815.6239489707161;1047.1862524640562;8.0;910.0;1806.0;2725.0;3633.0;;;;<class 'int'>;1
+digital_ponctual_key_digitafr;digital_ponctual;key_digitafr;100.0;digital_ponctual;;;;;;;;;;;;<class 'str'>;1

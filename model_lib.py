@@ -34,10 +34,12 @@ class RefEnv(object):
 class Lemm(object): # returns a dataframe with new columns that are lemmatized with a suffix lemm but the data frame must contain the headers that are defined in header_tr 
 	def __init__(self, X, file ='stopwords.txt'):
 		self.X = X
+		self.H = self.preprocesssing(self.X)
 		self.stopwords_file = RefEnv().transformed.format(file)
 		self.stop_words = self.get_set_stopwords()
 		self.lemmatizer = WordNetLemmatizer()
 		self.X = self.operation() # I don't really understand how it works? we define the dataframe first in the first line and then apply operation on it but why do we have to define it at the first line ? 
+
 
 	def lower_case(self, element):
 		return element.lower()
@@ -268,15 +270,15 @@ class Models(object):
 	def run_model_LDA(self, data_samples):
 		
 		# Use tf (raw term count) features for LDA.
-		print("Extracting tf features for LDA...")
+		#print("Extracting tf features for LDA...")
 		tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2,
 										max_features=self.n_features,
 										stop_words='english',
 										vocabulary = self.vocabulary)
 		t0 = time()
 		tf = tf_vectorizer.fit_transform(data_samples)
-		print("done in %0.3fs." % (time() - t0))
-		print()
+		#print("done in %0.3fs." % (time() - t0))
+		#print()
 
 
 		# Fit the NMF model
@@ -293,9 +295,9 @@ class Models(object):
 		#tfidf_feature_names = tfidf_vectorizer.get_feature_names()
 		#self.print_top_words(nmf_kullback, tfidf_feature_names, self.n_top_words)
 
-		print("Fitting LDA models with tf features, "
-			 "n_features=%d..."
-			 % (self.n_features))
+		#print("Fitting LDA models with tf features, "
+		#	 "n_features=%d..."
+		#	 % (self.n_features))
 		lda = LatentDirichletAllocation(n_components=self.n_components, max_iter=5,
 										learning_method='online',
 										learning_offset=50.,
@@ -304,15 +306,15 @@ class Models(object):
 										topic_word_prior = self.topic_word_prior)
 		t0 = time()
 		lda = lda.fit(tf)
-		print("done in %0.3fs." % (time() - t0))
+		#print("done in %0.3fs." % (time() - t0))
 
-		print("\nTopics in LDA model:")
+		#print("\nTopics in LDA model:")
 		tf_feature_names = tf_vectorizer.get_feature_names()
-		self.print_top_words(lda, tf_feature_names, self.n_top_words)
+		#self.print_top_words(lda, tf_feature_names, self.n_top_words)
 		
 
 		models = {}
-		models['LDA'] = {'model':lda, 'feature_names':tf_feature_names, 'tf':tf, 'vectorizer': tf_vectorizer, 'components':self.get_components(lda,tf_feature_names,self.n_top_words)}
+		models['LDA'] = {'model':lda, 'feature_names':tf_feature_names, 'tf':tf, 'vectorizer': tf_vectorizer, 'components':self.get_components(lda,tf_feature_names,self.n_top_words), 'components_kpi':{tf_feature_names[i]:a for i,a in enumerate(zip(*lda.components_))}}
 
 		return models
 

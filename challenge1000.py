@@ -35,8 +35,8 @@ class RefEnv(object):
 		self.dst = 'Source'
 		self.Export_folder = 'Export'
 		self.path_PROJECT_DATA = path_PROJECT_DATA
-		self.transformed = '{}DATA/Transformed/{}'.format(self.path_PROJECT_DATA, '{}')
-		self.platform_da = '{}Raw/{}'.format(self.path_PROJECT_DATA,'{}')### how exactly is working .format(, '{}') ?
+		self.platform_da = '{}DATA/Raw/{}'.format(self.path_PROJECT_DATA,'{}')### how exactly is working .format(, '{}') ?
+		self.transformed = '{}DATA/Transformed/{}'.format(self.path_PROJECT_DATA, '{}') ### how exactly is working .format(, '{}') ?
 		self.uri = '{}DATA/SCHEMA/{}'.format(self.path_PROJECT_DATA,uri)
 		self.schema = self.get_schema()
 

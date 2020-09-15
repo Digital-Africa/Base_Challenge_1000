@@ -35,13 +35,11 @@ class RefEnv(object):
 		self.dst = 'Source'
 		self.Export_folder = 'Export'
 		self.path_PROJECT_DATA = path_PROJECT_DATA
-		self.transformed = '{}DATA/Transformed/{}'.format(self.path_PROJECT_DATA, '{}')
-		self.platform_da = '{}Raw/{}'.format(self.path_PROJECT_DATA,'{}')### how exactly is working .format(, '{}') ?
+		self.transformed = '{}DATA/Transformed/{}'.format(self.path_PROJECT_DATA, '{}') ### how exactly is working .format(, '{}') ?
 		self.uri = '{}DATA/SCHEMA/{}'.format(self.path_PROJECT_DATA,uri)
 		self.schema = self.get_schema()
 
 	def get_schema(self):
-		print(self.uri)
 		with open(self.uri, 'r') as s:
 			schema = json.load(s)
 		return schema
@@ -50,6 +48,7 @@ class Native_1(object):
 	"""docstring for RefEnv"""
 	def __init__(self):
 		self.X = pandas.read_csv(RefEnv().transformed.format('df_new.csv')).set_index('key_main')
+		self.raw = self.X
 		self.X = self.operation()
 		self.descriptions = self.X[['nom_struc', 'prez_struc', 'prez_produit_struc','prez_marche_struc','prez_zone_struc','prez_objectif_struc', 'prez_innovante_struc','prez_duplicable_struc', 'prez_durable_struc']]
 		self.descriptions_trad = self.get_trans()
@@ -159,6 +158,7 @@ class Native(object): ###allows to get df1_clean with 6 columns : 'categorie','a
 	"""docstring for RefEnv"""
 	def __init__(self):
 		self.X = pandas.read_csv(RefEnv().transformed.format('df1_clean.csv'))
+		self.raw = self.X
 		self.ALL = self.operation().set_index('key_main') 
 		self.X = self.operation().set_index('key_main')#[['nom_struc','categorie','age_pers','nbr_salarie','ca_2017','ca_2018','ca_2019','pays_struc1','date_struc','prix_struc','linkedin_struc','email_pers']] 
 		self.descriptions = self.operation()[['nom_struc','prez_struc', 'prez_produit_struc','prez_marche_struc','prez_zone_struc','prez_objectif_struc', 'prez_innovante_struc','prez_duplicable_struc', 'prez_durable_struc','categorie']]
